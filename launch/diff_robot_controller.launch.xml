@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="inwheel_motor_ros2" exec="diff_robot_node" />
+</launch>

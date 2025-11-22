@@ -13,8 +13,8 @@ public:
     DiffRobotController(rclcpp::Node::SharedPtr node_ptr)
         : node_(node_ptr)
     {
-        dev_wheel_right_ = node_->declare_parameter<std::string>("dev_wheel_right", "/dev/ttyAMA1");
-        dev_wheel_left_ = node_->declare_parameter<std::string>("dev_wheel_left", "/dev/ttyAMA2");
+        dev_wheel_right_ = node_->declare_parameter<std::string>("dev_wheel_right", "/dev/ttyAMA2");
+        dev_wheel_left_ = node_->declare_parameter<std::string>("dev_wheel_left", "/dev/ttyAMA3");
 
         motor_right_ = std::make_unique<InwheelMotorDriver>(dev_wheel_right_.c_str());
         motor_left_  = std::make_unique<InwheelMotorDriver>(dev_wheel_left_.c_str());

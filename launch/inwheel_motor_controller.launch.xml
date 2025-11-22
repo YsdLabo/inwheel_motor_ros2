@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="device" default="/dev/ttyAMA0"/>
+  <node pkg="inwheel_motor_ros2" exec="inwheel_motor_control_node">
+    <param name="device" value="$(var device)"/>
+  </node>
+</launch>

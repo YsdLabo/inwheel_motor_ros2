@@ -16,13 +16,35 @@ add_executable(
   src/diff_robot_node.cpp
   src/inwheel_motor_driver.cpp
   src/serial_controller.cpp
-#  src/serial_test.cpp
 )
 ament_target_dependencies(
   diff_robot_node
   rclcpp
   geometry_msgs
   sensor_msgs
+)
+
+add_executable (
+  inwheel_motor_control_node
+  src/inwheel_motor_controller.cpp
+  src/inwheel_motor_driver.cpp
+  src/serial_controller.cpp
+)
+
+ament_target_dependencies (
+  inwheel_motor_control_node
+  rclcpp
+  geometry_msgs
+)
+
+install (
+  TARGETS diff_robot_node inwheel_motor_control_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install (
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)
