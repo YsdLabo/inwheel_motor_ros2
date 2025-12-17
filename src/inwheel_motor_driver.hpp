@@ -2,6 +2,7 @@
 #define  _INWHEEL_MOTOR_DRIVER_H_
 
 #include<math.h>
+#include<unistd.h>
 #include"serial_controller.h"
 
 #define BAUDRATE  115200
