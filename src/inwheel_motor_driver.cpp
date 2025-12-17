@@ -27,7 +27,9 @@ InwheelMotorDriver::~InwheelMotorDriver()
 void InwheelMotorDriver::close()
 {
 	motor_stop();
+	usleep(50000);
 	motor_off();
+	usleep(50000);
 	sp.Close();
 }
 
@@ -145,12 +147,14 @@ int InwheelMotorDriver::WriteCommand(unsigned char cmd[10], unsigned char res[10
 			res[num] = tmp;
 			num ++;
 			cnt = 0;
-			continue;
 		}
 		// Time out
-		if(cnt++ == 10) {
-			sp.Flush();
-			return -1;
+		else {
+			usleep(1000);
+			if(cnt++ == 100) {
+				sp.Flush();
+				return -1;
+			}
 		}
 	}
 
