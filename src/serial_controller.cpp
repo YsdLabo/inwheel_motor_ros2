@@ -1,5 +1,6 @@
 #include"serial_controller.h"
 #include <sys/time.h>
+#include <unistd.h>
 
 SerialPort* SerialPort::sp_ptr = NULL;
 void (*SerialPort::irq_func)(SerialPort* sp) = NULL;
@@ -136,6 +137,7 @@ int SerialPort::ReadLine(char* _str, int len)
 	char c;
 	int read_size = 0;
 	static int nl_flag = 0;
+	int timeout = 0;
 
 	while(read_size < len) {
 		if(read(fd, &c, 1) > 0)
@@ -166,6 +168,10 @@ int SerialPort::ReadLine(char* _str, int len)
 			}
 			_str[read_size] = c;
 			read_size ++;
+		}
+		else {
+			usleep(100);
+			if(timeout++ > 1000) return 0;
 		}
 	}
 	return read_size;

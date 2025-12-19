@@ -12,7 +12,7 @@ public:
 
     void run()
     {
-        drc_ = std::make_unique<DiffRobotController>(shared_from_this());
+        drc_ = std::make_unique<DiffRobotController>(this);
         drc_->run();
     }
 
@@ -23,9 +23,12 @@ private:
 int main(int argc, char** argv)
 {
     rclcpp::init(argc, argv);
+
     auto node = std::make_shared<DiffRobotNode>();
     node->run();
     rclcpp::spin(node);
+    node = nullptr;
+
     rclcpp::shutdown();
     return 0;
 }

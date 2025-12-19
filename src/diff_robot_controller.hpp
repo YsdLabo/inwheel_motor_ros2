@@ -10,7 +10,7 @@
 class DiffRobotController
 {
 public:
-    DiffRobotController(rclcpp::Node::SharedPtr node_ptr)
+    DiffRobotController(rclcpp::Node* node_ptr)
         : node_(node_ptr)
     {
         dev_wheel_right_ = node_->declare_parameter<std::string>("dev_wheel_right", "/dev/ttyAMA2");
@@ -52,7 +52,7 @@ public:
     }
 
 private:
-    rclcpp::Node::SharedPtr node_;
+    rclcpp::Node* node_;
     rclcpp::Subscription<geometry_msgs::msg::TwistStamped>::SharedPtr sub_cmd_vel_;
     rclcpp::Publisher<sensor_msgs::msg::JointState>::SharedPtr pub_joint_states_;
     rclcpp::TimerBase::SharedPtr timer_;
